@@ -19,6 +19,7 @@ import org.springframework.session.web.SessionRepositoryFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Configuration
 @ComponentScan
@@ -29,11 +30,11 @@ public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
-    
+
     @Configuration
     @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
     protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    	
+
     }
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -43,11 +44,16 @@ public class Application {
 		SessionRepositoryFilter filter = new SessionRepositoryFilter(sessionRepository);
 		return filter;
 	}
-	
+
 	@RequestMapping("/")
-	public String home(HttpSession session, Model model) {
-		model.addAttribute("token", session.getId());
+	public String home() {
 		return "index";
 	}
+
+  @RequestMapping("/token")
+  @ResponseBody
+  public String home(HttpSession session) {
+    return session.getId();
+  }
 
 }
