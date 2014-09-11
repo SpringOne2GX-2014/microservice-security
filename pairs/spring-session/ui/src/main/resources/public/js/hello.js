@@ -1,20 +1,29 @@
-function Hello($scope, $http) {
-	$http({
-		method : 'GET',
-		url : 'http://localhost:9000/token'
-	}).then(function(token) {
+var angular = require('angular');
 
-		var headers = {
-			'X-Token' : token
-		};
+angular.module('hello',[])
+	.controller('Hello', function Hello($scope, $http) {
 
-		return $http({
-			method : 'GET',
-			url : 'http://localhost:9000',
-			headers : headers
-		})
+		$http({
+			method: 'GET',
+			url: 'http://localhost:9000/token'
+		}).then(function(token) {
 
-	}).success(function(data) {
-		$scope.greeting = data;
-	})
-};
+			var headers = {
+				'X-Token' : token
+			};
+
+			return $http({
+				method : 'GET',
+				url : 'http://localhost:9000',
+				headers : headers
+			});
+
+		}).then(function(data) {
+			$scope.greeting = data;
+		}).catch(function(e) { // TODO: Remove
+			console.error(e);
+		});
+
+	});
+
+angular.bootstrap(document, ['hello']);
