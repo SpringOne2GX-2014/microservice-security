@@ -1,7 +1,7 @@
 {
   "name": "microservice-security",
   "version": "0.0.0",
-  "homepage": "https://github.com",
+  "homepage": "https://github.com/SpringOne2GX-2014/microservice-security",
   "authors": [
     "Dave Syer"
   ],
@@ -9,7 +9,7 @@
   "moduleType": [
     "node"
   ],
-  "license": "MIT",
+  "license": "ASF",
   "ignore": [
     "**/.*",
     "node_modules",
